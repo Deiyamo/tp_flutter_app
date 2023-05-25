@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tp_flutter_app/models/post.dart';
-import 'package:tp_flutter_app/screens/add_post_screen/add_post_screen.dart';
-import 'package:tp_flutter_app/screens/post_detail_screen/post_detail_screen.dart';
-import 'package:tp_flutter_app/screens/posts_screen/posts_screen.dart';
+import 'package:tp_flutter_app/screens/ui/add_post_screen/add_post_screen.dart';
+import 'package:tp_flutter_app/screens/ui/post_detail_screen/post_detail_screen.dart';
+import 'package:tp_flutter_app/screens/ui/posts_screen/posts_screen.dart';
 
 void main() {
   runApp(const MyApp());
