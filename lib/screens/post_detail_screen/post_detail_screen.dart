@@ -9,6 +9,8 @@ class PostDetailScreen extends StatelessWidget {
 
   final Post post;
 
+  static const routeName = '/PostDetailScreen';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
