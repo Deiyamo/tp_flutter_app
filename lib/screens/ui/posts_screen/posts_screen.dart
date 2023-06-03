@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tp_flutter_app/models/post.dart';
@@ -9,6 +10,17 @@ import 'package:tp_flutter_app/widgets/post_modal_bottom_sheet.dart';
 class PostsScreen extends StatelessWidget {
   const PostsScreen({super.key});
 
+  Future<void> _addPost() async {
+    final CollectionReference usersCollection = FirebaseFirestore.instance.collection('posts');
+
+    try {
+      await usersCollection.add({"first_name": "John", "last_name": "Doe", "age": 42});
+      debugPrint("User added");
+    } catch (error) {
+      debugPrint("Failed to add user: $error");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +28,7 @@ class PostsScreen extends StatelessWidget {
         title: const Text('Posts'),
         actions: [
           IconButton(
-            onPressed: () => throw Exception('oups, j\'ai crash.'),
+            onPressed: () => _addPost(),
             icon: const Icon(Icons.car_crash),
           ),
         ],
