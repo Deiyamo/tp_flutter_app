@@ -10,9 +10,10 @@ class GetAllPosts extends PostsEvent {
 }
 
 class AddPost extends PostsEvent {
-  final Post post;
+  final String title;
+  final String body;
 
-  AddPost(this.post);
+  AddPost({required this.title, required this.body});
 }
 
 class EditPost extends PostsEvent {
