@@ -29,6 +29,13 @@
             {
               "client_id": "1022740369262-0fifcthfsotql82u0gfdv4ni5ng23h2f.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1022740369262-lev2pqargjqggjg9n0tnb6ltrlj4dq40.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.timdev.tpFlutterApp"
+              }
             }
           ]
         }

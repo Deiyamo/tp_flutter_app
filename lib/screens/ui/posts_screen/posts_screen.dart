@@ -14,6 +14,12 @@ class PostsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Posts'),
+        actions: [
+          IconButton(
+            onPressed: () => throw Exception('oups, j\'ai crash.'),
+            icon: const Icon(Icons.car_crash),
+          ),
+        ],
       ),
       body: BlocBuilder<PostsBloc, PostsState>(
         builder: (context, state) {
