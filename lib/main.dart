@@ -6,7 +6,15 @@ import 'package:tp_flutter_app/screens/ui/add_post_screen/add_post_screen.dart';
 import 'package:tp_flutter_app/screens/ui/post_detail_screen/post_detail_screen.dart';
 import 'package:tp_flutter_app/screens/ui/posts_screen/posts_screen.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'package:tp_flutter_app/firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 

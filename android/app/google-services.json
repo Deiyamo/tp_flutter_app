@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1022740369262",
+    "project_id": "tp-flutter-app",
+    "storage_bucket": "tp-flutter-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022740369262:android:24a7d9463751aae0cc3b7f",
+        "android_client_info": {
+          "package_name": "com.timdev.tp_flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1022740369262-0fifcthfsotql82u0gfdv4ni5ng23h2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9dcMcJPT9a-fUXoqxKiyZ6erPc4M_2_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1022740369262-0fifcthfsotql82u0gfdv4ni5ng23h2f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
