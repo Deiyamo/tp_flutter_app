@@ -10,28 +10,11 @@ import 'package:tp_flutter_app/widgets/post_modal_bottom_sheet.dart';
 class PostsScreen extends StatelessWidget {
   const PostsScreen({super.key});
 
-  Future<void> _addPost() async {
-    final CollectionReference usersCollection = FirebaseFirestore.instance.collection('posts');
-
-    try {
-      await usersCollection.add({"first_name": "John", "last_name": "Doe", "age": 42});
-      debugPrint("User added");
-    } catch (error) {
-      debugPrint("Failed to add user: $error");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Posts'),
-        actions: [
-          IconButton(
-            onPressed: () => _addPost(),
-            icon: const Icon(Icons.car_crash),
-          ),
-        ],
       ),
       body: BlocBuilder<PostsBloc, PostsState>(
         builder: (context, state) {
@@ -61,7 +44,9 @@ class PostsScreen extends StatelessWidget {
                 );
               }
 
-              return ListView.builder(
+              return FirestoreL
+
+              /*return ListView.builder(
                 itemCount: posts.length,
                 itemBuilder: (context, index) {
                   final post = posts[index];
@@ -71,7 +56,7 @@ class PostsScreen extends StatelessWidget {
                     onTap: () => _onPostTap(context, post),
                   );
                 },
-              );
+              );*/
           }
         },
       ),

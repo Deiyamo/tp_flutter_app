@@ -77,9 +77,6 @@ class _PostFormState extends State<PostForm> {
                       AddPost(title: _titleController.text, body: _bodyController.text),
                     );
                   }
-
-
-
                   debugPrint('Post edited');
                   Navigator.of(context).pop();
                 }
