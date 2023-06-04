@@ -43,7 +43,6 @@ class MyApp extends StatelessWidget {
       ),
       child: BlocProvider(
         create: (context) => PostsBloc(
-          // repository: context.read<PostsRepository>(),
           repository: RepositoryProvider.of<PostsRepository>(context),
         )..add(GetAllPosts()),
         child: MaterialApp(
