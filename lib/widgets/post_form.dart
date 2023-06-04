@@ -43,6 +43,9 @@ class _PostFormState extends State<PostForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Title',
+            ),
             controller: _titleController,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -52,6 +55,9 @@ class _PostFormState extends State<PostForm> {
             },
           ),
           TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Body',
+            ),
             controller: _bodyController,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -77,7 +83,6 @@ class _PostFormState extends State<PostForm> {
                       AddPost(title: _titleController.text, body: _bodyController.text),
                     );
                   }
-                  debugPrint('Post edited');
                   Navigator.of(context).pop();
                 }
               },

@@ -4,6 +4,7 @@ import 'package:tp_flutter_app/models/post.dart';
 import 'package:tp_flutter_app/repository/posts_repository.dart';
 
 part 'posts_event.dart';
+
 part 'posts_state.dart';
 
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
@@ -14,26 +15,21 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       emit(state.copyWith(status: PostsStatus.loading));
 
       try {
-        final posts = await repository.getPosts();
-        // final posts = List.generate(count, (index) => Post(id: index, title: 'Post ${index + 1}', body: 'Body ${index + 1}'));
-        emit(state.copyWith(status: PostsStatus.success, posts: posts));
+        final postsStream = repository.getPosts();
+        await emit.forEach(postsStream, onData: (posts) {
+          return state.copyWith(posts: posts, status: PostsStatus.success);
+        });
       } catch (error) {
-        print('bloc');
-        debugPrint(error.toString());
         emit(state.copyWith(status: PostsStatus.error, error: 'Une erreur est survenue !'));
       }
-
     });
 
     on<AddPost>((event, emit) async {
       emit(state.copyWith(status: PostsStatus.loading));
 
-      final post = Post(id: '', title: event.title, body: event.body);
-
       try {
-        await repository.addPost(post);
-
-        emit(state.copyWith(status: PostsStatus.success, posts: [...state.posts, post]));
+        await repository.addPost(title: event.title, body: event.body);
+        emit(state.copyWith(status: PostsStatus.success, posts: [...state.posts]));
       } catch (error) {
         emit(state.copyWith(status: PostsStatus.error, error: 'Une erreur est survenue !'));
       }
@@ -56,7 +52,6 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
 
         emit(state.copyWith(status: PostsStatus.success, posts: posts));
       } catch (error) {
-        debugPrint('bloc edit');
         debugPrint(error.toString());
         emit(state.copyWith(status: PostsStatus.error, error: 'Une erreur est survenue !'));
       }

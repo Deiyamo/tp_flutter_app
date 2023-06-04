@@ -10,16 +10,19 @@ class FirestorePostsDataSource extends PostsDataSource {
 
   final StreamController<List<Post>> _postStreamController = StreamController<List<Post>>.broadcast();
 
-  Stream listenToPostsRealTime() {
+  @override
+  Stream<List<Post>> getStream() {
     _collection.orderBy('title').snapshots().listen((snapshot) {
-      final postList = snapshot.docs.map((e) => Post.fromJson(e.data(), e.id)).toList();
-      _postStreamController.add(postList);
+      if (snapshot.docs.isNotEmpty) {
+        final postList = snapshot.docs.map((e) => Post.fromJson(e.data(), e.id)).toList();
+        _postStreamController.add(postList);
+      }
     });
 
     return _postStreamController.stream;
   }
 
-  @override
+  // not used anymore
   Future<List<Post>> get() async {
     try {
       final snapshot = await _collection.orderBy('title').get();
@@ -33,9 +36,9 @@ class FirestorePostsDataSource extends PostsDataSource {
   }
 
   @override
-  Future<void> add(Post post) async {
+  Future<void> add(String title, String body) async {
     try {
-      await _collection.add(post.toJson());
+      await _collection.add({'title': title, 'body': body});
     } on FirebaseException catch (e) {
       // TODO: Log error
       throw Exception(e.message);
@@ -45,7 +48,8 @@ class FirestorePostsDataSource extends PostsDataSource {
   @override
   Future<void> update(Post post) async {
     try {
-      await _collection.doc(post.id.toString()).update(post.toJson());
+      print('post id: ${post.id}');
+      await _collection.doc(post.id).update(post.toJson());
     } on FirebaseException catch (e) {
       // TODO: Log error
       throw Exception(e.message);

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tp_flutter_app/models/post.dart';
@@ -18,7 +19,6 @@ class PostsScreen extends StatelessWidget {
       ),
       body: BlocBuilder<PostsBloc, PostsState>(
         builder: (context, state) {
-          // BlocProvider.of<PostsBloc>(context).add(GetAllPosts(4));
           switch (state.status) {
             case PostsStatus.initial:
               return const SizedBox();
@@ -44,9 +44,20 @@ class PostsScreen extends StatelessWidget {
                 );
               }
 
-              return FirestoreL
+              // final query = FirebaseFirestore.instance.collection('posts').orderBy('title');
+              /*return FirestoreListView(
+                query: query,
+                itemBuilder: (context, snapshot) {
+                  final post = Post.fromJson(snapshot.data(), snapshot.id);
+                  return ListTile(
+                    title: Text(post.title),
+                    subtitle: Text(post.body),
+                    onTap: () => _onPostTap(context, post),
+                  );
+                },
+              );*/
 
-              /*return ListView.builder(
+              return ListView.builder(
                 itemCount: posts.length,
                 itemBuilder: (context, index) {
                   final post = posts[index];
@@ -56,7 +67,7 @@ class PostsScreen extends StatelessWidget {
                     onTap: () => _onPostTap(context, post),
                   );
                 },
-              );*/
+              );
           }
         },
       ),
