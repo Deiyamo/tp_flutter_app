@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tp_flutter_app/models/post.dart';
 import 'package:tp_flutter_app/screens/logic/posts_bloc/posts_bloc.dart';
 import 'package:tp_flutter_app/screens/ui/post_detail_screen/post_detail_screen.dart';
+import 'package:tp_flutter_app/theme/theme.dart';
 import 'package:tp_flutter_app/widgets/post_form.dart';
 import 'package:tp_flutter_app/widgets/post_modal_bottom_sheet.dart';
 
@@ -62,8 +63,17 @@ class PostsScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final post = posts[index];
                   return ListTile(
-                    title: Text(post.title),
-                    subtitle: Text(post.body),
+                    title: Text(
+                      post.title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: Theme.of(context).customColors.onSurface),
+                    ),
+                    subtitle: Text(
+                      post.body,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
                     onTap: () => _onPostTap(context, post),
                   );
                 },
@@ -73,7 +83,10 @@ class PostsScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddPostForm(context),
-        child: const Icon(Icons.edit_note),
+        child: Icon(
+          Icons.edit_note,
+          color: Theme.of(context).customColors.primary,
+        ),
       ),
     );
   }

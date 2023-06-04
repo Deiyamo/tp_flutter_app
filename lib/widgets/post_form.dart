@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tp_flutter_app/models/post.dart';
 import 'package:tp_flutter_app/screens/logic/posts_bloc/posts_bloc.dart';
+import 'package:tp_flutter_app/theme/theme.dart';
 
 class PostForm extends StatefulWidget {
   const PostForm({
@@ -39,9 +40,9 @@ class _PostFormState extends State<PostForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
         children: [
+          const SizedBox(height: 16),
           TextFormField(
             decoration: const InputDecoration(
               labelText: 'Title',
@@ -54,6 +55,7 @@ class _PostFormState extends State<PostForm> {
               return null;
             },
           ),
+          const SizedBox(height: 16),
           TextFormField(
             decoration: const InputDecoration(
               labelText: 'Body',
@@ -66,28 +68,26 @@ class _PostFormState extends State<PostForm> {
               return null;
             },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-
-                  if (widget.post != null) {
-                    // Edit Form
-                    BlocProvider.of<PostsBloc>(context).add(
-                      EditPost(Post(id: widget.post!.id, title: _titleController.text, body: _bodyController.text)),
-                    );
-                  } else {
-                    // Add Form
-                    BlocProvider.of<PostsBloc>(context).add(
-                      AddPost(title: _titleController.text, body: _bodyController.text),
-                    );
-                  }
-                  Navigator.of(context).pop();
+          const SizedBox(height: 16),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                if (widget.post != null) {
+                  // Edit Form
+                  BlocProvider.of<PostsBloc>(context).add(
+                    EditPost(Post(id: widget.post!.id, title: _titleController.text, body: _bodyController.text)),
+                  );
+                } else {
+                  // Add Form
+                  BlocProvider.of<PostsBloc>(context).add(
+                    AddPost(title: _titleController.text, body: _bodyController.text),
+                  );
                 }
-              },
-              child: const Text('Submit'),
-            ),
+                Navigator.of(context).pop();
+              }
+            },
+            child: const Text('Submit'),
           ),
         ],
       ),

@@ -13,6 +13,7 @@ import 'package:tp_flutter_app/screens/ui/posts_screen/posts_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tp_flutter_app/firebase_options.dart';
+import 'package:tp_flutter_app/theme/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,9 +49,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'TP Flutter',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+          theme: AppTheme.darkThemeData,
           routes: {
             '/': (context) => const PostsScreen(),
             AddPostScreen.routeName: (context) => const AddPostScreen(),

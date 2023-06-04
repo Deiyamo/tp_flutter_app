@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tp_flutter_app/theme/theme.dart';
 
 class PostModalBottomSheet extends StatelessWidget {
   final Widget child;
@@ -29,10 +30,9 @@ class PostModalBottomSheet extends StatelessWidget {
                   margin: const EdgeInsets.only(left: 16, top: 16),
                   child: CircleAvatar(
                     radius: 20,
-                    backgroundColor: Colors.grey.shade300,
+                    backgroundColor: Theme.of(context).customColors.onPrimary,
                     child: IconButton(
                       icon: const Icon(Icons.close),
-                      color: Theme.of(context).colorScheme.onSurface,
                       tooltip: MaterialLocalizations.of(context).closeButtonTooltip,
                       onPressed: () => Navigator.of(context).pop(),
                     ),
